@@ -5,10 +5,10 @@ September 23, 2020
 Bikeshare Analysis
 
 ### Description
-Describe what your project is about and what it does
+Analyze Data from Bikeshare from 3 cites (ie: Chicago,New York City, Washington)
 
 ### Files used
-Include the files used
+*.CSV
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+Programming for Data Science by Udacity
