@@ -4,6 +4,7 @@ Created on Mon Sep  7 15:13:26 2020
 
 @author: sk071a
 """
+# Analyze Bikeshare Data to provide Key Analysis
 import time
 import pandas as pd
 import numpy as np
@@ -22,7 +23,7 @@ def get_filters():
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    
+
     city = ''
     while city not in ['chicago','new york city','washington']:
         print('Which city we want to analyze? (Type :"Chicago" or "New York City" or "Washington")')
@@ -37,7 +38,7 @@ def get_filters():
     while day not in ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']:
         print('Which day of the week we want to analyze? (Type : "All" to analyze all  days or day by "Monday" or "Tuesday" or "Wednesday" or "Thursday" or "Friday" or "Saturday" or "Sunday")')
         day = input().lower()
-    
+
 
     print('-'*40)
     return city, month, day
@@ -76,7 +77,7 @@ def load_data(city, month, day):
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
-        df = df[df['day_of_week'] == day.title()] 
+        df = df[df['day_of_week'] == day.title()]
 
     return df
 
@@ -88,7 +89,7 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-    
+
     most_common_month = df['month'].mode()[0]
     if most_common_month ==1:
         print('Most Common Month to travel is January.')
@@ -102,21 +103,21 @@ def time_stats(df):
         print('Most Common Month to travel is May.')
     if most_common_month ==6:
         print('Most Common Month to travel is June.')
-        
+
 
     # display the most common day of week
 
     print('Most Commom Day of Week to travel is',df['day_of_week'].mode()[0])
-    
+
     # display the most common start hour
-    
+
     df['hour'] = df['Start Time'].dt.hour
     common_hour = df['hour'].mode()[0]
     if common_hour >12:
         new_hour = common_hour - 12
         print('Most Common Hour to travel is',new_hour,'PM.')
     if common_hour <12:
-        print('Most Common Hour to travel is',common_hour,'AM.')   
+        print('Most Common Hour to travel is',common_hour,'AM.')
     if common_hour ==12:
         print('Most Common Hour to travel is',common_hour,'PM.')
 
@@ -135,7 +136,7 @@ def station_stats(df):
     print('Most Commomly used of Start Station is',df['Start Station'].mode()[0],'.')
 
     # display most commonly used end station
-    
+
     print('Most Commomly used of End Station is',df['End Station'].mode()[0],'.')
 
     # display most frequent combination of start station and end station trip
@@ -160,7 +161,7 @@ def trip_duration_stats(df):
     print('Total Travel Time is', total_duration,'mintues or',T_hours,'hours and',T_mins,'minutes.')
 
     # display mean travel time
-    
+
     Average_duration = round(np.mean(df['Trip Duration']),2)
     A_hours = Average_duration // 60
     A_mins = Average_duration % 60
@@ -186,7 +187,7 @@ def user_stats(df):
         print('Counts of Gender:')
         print(df['Gender'].value_counts())
     else:
-        print('NO GENDER INFO IS AVAILABLE') 
+        print('NO GENDER INFO IS AVAILABLE')
 
     # Display earliest, most recent, and most common year of birth
     if 'Birth Year' in df.columns:
@@ -195,11 +196,13 @@ def user_stats(df):
         print('The most common birth year is', int(df['Birth Year'].mode()[0]))
     else:
         print('NO Birth Year INFO IS AVAILABLE')
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
 def view_date(df):
+    """Display 5 rows at a time."""
+
     print('Here is the first 5 rows of the raw data')
     df['row']=np.arange(len(df))
     i=0
